@@ -66,10 +66,8 @@ function App() {
         <Price />
         <PriceShape />
       </Container>
-      <Container>
-        <Contact />
-        <Footer />
-      </Container>
+      <Contact />
+      <Footer />
     </>
   );
 }

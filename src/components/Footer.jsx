@@ -47,7 +47,7 @@ const Footer = () => {
           <ListItem>API</ListItem>
           <ListItem>Community</ListItem>
         </List>
-        <CopyWrite>Zaid Khan @</CopyWrite>
+        <CopyWrite>All rights reserved @</CopyWrite>
       </Wrapper>
     </Container>
   );
