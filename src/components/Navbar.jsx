@@ -54,7 +54,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo>Codemy</Logo>
+          <Logo>Forma</Logo>
           <Menu>
             <MenuItem>Home</MenuItem>
             <MenuItem>Features</MenuItem>
