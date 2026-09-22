@@ -1,39 +1,39 @@
-import React from 'react'
-import styled from 'styled-components';
-import search from "../images/search.png"
+import React from "react";
+import styled from "styled-components";
 
-const Container = styled.div`
-width: 100px;
-padding: 20px;
-display: flex;
-flex-direction: column;
-align-items: center;
-box-shadow: 4px -5px 19px 6px rgba(0,0,0,0.75);
--webkit-box-shadow: 4px -5px 19px 6px rgba(0,0,0,0.75);
--moz-box-shadow: 4px -5px 19px 6px rgba(0,0,0,0.75);
-@media only screen and (max-width:480px){
-width: 50px;
-};
+const Card = styled.li`
+  padding: 22px;
+  border: 1px solid #eee3e8;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 16px #4c234305;
 `;
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+`;
+const Number = styled.span`
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fcebf0;
+  color: #b92049;
+  font-size: 12px;
+  font-weight: bold;
+`;
+const Title = styled.h3`font-size: 19px; line-height: 1.3; margin: 0;`;
+const Description = styled.p`font-size: 15px; line-height: 1.6; color: #6d6576; margin: 0;`;
 
-const Image = styled.img`
-width: 20px;
-`;
-
-const Text = styled.span`
-margin-top: 10px;
-text-align: center;
-@media only screen and (max-width:480px){
-font-size: 14px;
-};
-`;
-const MiniCard = () => {
-    return (
-        <Container>
-            <Image src={search}/>
-            <Text>lorem ipsum is the dert.</Text>
-        </Container>
-    )
-}
+const MiniCard = ({ number, title, description }) => (
+  <Card>
+    <Heading><Number aria-hidden="true">{number}</Number><Title>{title}</Title></Heading>
+    <Description>{description}</Description>
+  </Card>
+);
 
 export default MiniCard;

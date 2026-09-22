@@ -28,25 +28,12 @@ const ClipShape = styled.div`
   background-color: crimson;
 `;
 
-const FeatureShape = styled.div`
-  ${Shape}
-  clip-path: polygon(0% 0%, 55% 0%, 33% 100%, 0% 100%);
-  background-color: pink;
-`;
-
-const ServiceShape = styled.div`
-  ${Shape}
-  clip-path: polygon(0% 0%, 33% 0%, 33% 100%, 0% 100%);
-  background-color: #f88497;
-`;
-
 const PriceShape = styled.div`
   ${Shape}
   clip-path: polygon(33% 0%, 100% 0%, 100% 100%, 67% 100%);
   background-color: crimson;
 `;
 function App() {
-  const SmallScreen = window.screen.width <= 480 ? true : false;
   return (
     <>
       <Container>
@@ -54,14 +41,8 @@ function App() {
         <Intro />
         <ClipShape />
       </Container>
-      <Container>
-        <Feature />
-        <FeatureShape />
-      </Container>
-      <Container>
-        <Service />
-        {!SmallScreen && <ServiceShape />}
-      </Container>
+      <Feature />
+      <Service />
       <Container>
         <Price />
         <PriceShape />

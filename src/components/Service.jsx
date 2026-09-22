@@ -1,166 +1,144 @@
 import React from "react";
 import styled from "styled-components";
-import newgirl from "../images/gg3.png";
+import photographer from "../images/gg3.png";
 import MiniCard from "./MiniCard";
-import play from "../images/play.png";
-import { useState } from "react";
-const Container = styled.div`
-  display: flex;
-  @media only screen and (max-width: 480px) {
-    flex-direction: column;
-  } ;
-`;
 
-const Left = styled.div`
-  width: 50%;
+const Section = styled.section`
+  padding: 88px 24px;
+  background: #fffaf9;
+  color: #242139;
+  &, & * { box-sizing: border-box; }
+  @media (max-width: 600px) { padding: 56px 18px; }
+`;
+const Layout = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: 64px;
+  @media (max-width: 1000px) { gap: 32px; }
+  @media (max-width: 800px) { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+`;
+const Visual = styled.figure`
   position: relative;
-  @media only screen and (max-width: 480px) {
-    display: none;
+  isolation: isolate;
+  height: 560px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 120px 24px 24px 24px;
+  background: linear-gradient(145deg, #fbdde5, #f29aae);
+  &::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    top: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #ffffff80;
+    border-radius: 50%;
+    box-shadow: 0 0 0 32px #ffffff14, 0 0 0 64px #ffffff10;
+    z-index: -1;
   }
+  @media (max-width: 800px) { height: 400px; max-width: 520px; width: 100%; margin: 0 auto; }
 `;
-
 const Image = styled.img`
-  display: ${(props) => props.open && "none"};
-  height: 100vh;
-  width: 100%;
-  object-fit: cover;
-  margin-left: 5px;
-  
-`;
-
-const Video = styled.video`
-  height: 100%;
-  display: ${(props) => !props.open && "none"};
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  @media only screen and (max-width: 480px) {
-    width: 100%;
-    height: 70%;
-  } ;
+  height: calc(100% + 100px);
+  width: auto;
+  max-width: none;
+  bottom: -95px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
-
-const Right = styled.div`
-  width: 50%;
-  @media only screen and (max-width: 480px) {
-    width: 100%;
-  } ;
+const Caption = styled.figcaption`
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  padding: 20px 22px;
+  background: #fffaf9;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px #57263b14;
+  small { display: block; color: #a62043; font-size: 11px; font-weight: bold; letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 7px; }
+  p { font-size: 20px; line-height: 1.3; font-weight: bold; margin: 0; }
 `;
-
-const Wrapper = styled.div`
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  @media only screen and (max-width: 480px) {
-    padding: 20px;
-  } ;
-`;
-
-const Title = styled.h1``;
-
-const Desc = styled.p`
-  font-size: 20px;
-  margin-top: 20px;
-  color: #555;
-`;
-
-const Card = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-`;
-
-const Button = styled.button`
-  width: 180px;
-  border: none;
-  border-radius: 10px;
-  background-color: darkblue;
-  color: white;
-  padding: 15px;
-  font-size: 20px;
-  margin-top: 50px;
-  cursor: pointer;
+const Content = styled.div`min-width: 0;`;
+const Eyebrow = styled.p`
   display: flex;
   align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b92049;
+  margin: 0 0 16px;
+  &::before { content: ""; width: 30px; height: 2px; background: currentColor; }
 `;
-
-const Icon = styled.img`
-  width: 20px;
-  margin-right: 10px;
+const Title = styled.h2`
+  font-size: clamp(34px, 3.5vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  margin: 0 0 18px;
+  span { color: #bf224a; }
 `;
-
-const Model = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+const Description = styled.p`
+  font-size: 18px;
+  line-height: 1.6;
+  color: #6d6576;
+  margin: 0;
 `;
-
-const ClosedButton = styled.button`
-  padding: 15px;
-  background-color: wheat;
-  border: none;
-  top: 50px;
-  left: 250px;
-  position: absolute;
-  border-radius: 5px;
+const Steps = styled.ol`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 28px 0;
+  @media (max-width: 480px) { grid-template-columns: minmax(0, 1fr); }
 `;
+const Link = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 50px;
+  padding: 14px 24px;
+  border-radius: 9px;
+  background: #bf224a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover { background: #a51a3d; }
+  &:focus-visible { outline: 3px solid #bf224a; outline-offset: 4px; }
+  @media (max-width: 480px) { width: 100%; }
+`;
+const steps = [
+  { number: "01", title: "Discover", description: "Define the audience, explore ideas, and set a clear direction." },
+  { number: "02", title: "Design", description: "Bring the idea to life with thoughtful layouts, color, and typography." },
+  { number: "03", title: "Refine", description: "Review the details and shape the design around feedback." },
+  { number: "04", title: "Deliver", description: "Prepare a polished, consistent design for screens of every size." },
+];
 
-const Service = () => {
-  const [open, setOpen] = useState(false);
-  const SmallScreen = window.screen.width <= 480 ? true : false;
-  return (
-    <Container>
-      <Left>
-        <Image open={open} src={newgirl} />
-        <Video
-          open={open}
-          autoPlay
-          loop
-          controls
-          src="https://player.vimeo.com/external/458886084.sd.mp4?s=57655129e3b533362cfa45815d57632d303d4b70&profile_id=165&oauth2_token_id=57447761"
-        />
-      </Left>
-      <Right>
-        <Wrapper>
-          <Title>Simple process to start</Title>
-          <Desc>
-            We provide digital experiences services to startups and small
-            businesses to looking for a partner of their digital media ,design
-            and development,lead generation and communication requirements.We
-            work with you,not for you.Although ,we have a great resources.
-          </Desc>
-
-          <Card>
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-          </Card>
-          <Button onClick={() => setOpen(true)}>
-            <Icon src={play} />
-            How it works
-          </Button>
-        </Wrapper>
-      </Right>
-      {SmallScreen && open && (
-        <Model>
-          <Video
-            open={open}
-            autoPlay
-            loop
-            controls
-            src="https://player.vimeo.com/external/458886084.sd.mp4?s=57655129e3b533362cfa45815d57632d303d4b70&profile_id=165&oauth2_token_id=57447761"
-          />
-          <ClosedButton onClick={() => setOpen(false)}>Click</ClosedButton>
-        </Model>
-      )}
-    </Container>
-  );
-};
+const Service = () => (
+  <Section id="process" aria-labelledby="process-title">
+    <Layout>
+      <Visual>
+        <Image src={photographer} alt="Photographer looking through a camera" loading="lazy" />
+        <Caption><small>The creative approach</small><p>A fresh perspective.<br />A thoughtful result.</p></Caption>
+      </Visual>
+      <Content>
+        <Eyebrow>The process</Eyebrow>
+        <Title id="process-title">From a first idea to<br /><span>the final detail.</span></Title>
+        <Description>Great design starts with a clear direction. Four thoughtful steps turn inspiration into a cohesive visual experience.</Description>
+        <Steps>{steps.map((step) => <MiniCard key={step.number} {...step} />)}</Steps>
+        <Link href="#contact">Let's talk design <span aria-hidden="true">↗</span></Link>
+      </Content>
+    </Layout>
+  </Section>
+);
 
 export default Service;
