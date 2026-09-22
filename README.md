@@ -4,6 +4,10 @@ A creative landing page concept built with React 17 and styled-components. Featu
 
 This is a frontend design showcase, not a complete service or product. The contact form opens an email draft in your email app; it does not send messages through a backend.
 
+## Preview
+
+![Forma landing page hero section](docs/screenshot.png)
+
 ## Run locally
 
 With Node.js and npm installed, run these commands from the project folder:
@@ -30,3 +34,4 @@ The output is saved to `build/`.
 - `src/components/` - page sections and their styles.
 - `src/images/` - image assets.
 - `public/` - HTML template, fonts, and Forma favicon.
+- `docs/` - README screenshots.
